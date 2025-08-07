@@ -28,29 +28,28 @@
   <p>I prepared a little surprise for you 🎁</p>
   <button class="gift" onclick="alert('Surprise coming soon!')">Open your gift</button>
   <p style="margin-top:2em;">With all my love, <br> Youssef 💜</p>
-
   <audio id="birthdayMusic" autoplay loop>
-    <source src="https://raw.githubusercontent.com/Joo-png69/happy-birthday-mariam/main/happy-birthday-musicbox.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  <source src="https://raw.githubusercontent.com/Joo-png69/happy-birthday-mariam/main/happy-birthday-musicbox.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
-  <script>
-    window.addEventListener('load', () => {
-      const audio = document.getElementById('birthdayMusic');
-      audio.play().catch(() => {
-        const btn = document.createElement('button');
-        btn.innerText = "تشغيل الموسيقى 🎵";
-        btn.style.padding = "10px 20px";
-        btn.style.fontSize = "16px";
-        btn.style.marginTop = "20px";
-        btn.style.cursor = "pointer";
-        btn.onclick = () => {
-          audio.play();
-          btn.remove();
-        };
-        document.body.appendChild(btn);
-      });
+<script>
+  window.addEventListener('load', () => {
+    const audio = document.getElementById('birthdayMusic');
+    audio.play().catch(() => {
+      const btn = document.createElement('button');
+      btn.innerText = "تشغيل الموسيقى 🎵";
+      btn.style.padding = "10px 20px";
+      btn.style.fontSize = "16px";
+      btn.style.marginTop = "20px";
+      btn.style.cursor = "pointer";
+      btn.onclick = () => {
+        audio.play();
+        btn.remove();
+      };
+      document.body.appendChild(btn);
     });
-  </script>
+  });
+</script>
 </body>
 </html>
