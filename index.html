@@ -18,8 +18,45 @@
     h1 { font-size:3em; margin:0.2em; }
     p { font-size:1.2em; margin:0.5em; }
     .gift { margin-top:1em; padding:0.8em 1.5em; background:#ffffffcc; color:#4a0a3d; border:none; border-radius:8px; font-size:1.1em; cursor:pointer; }
+    .star, .heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 5s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) scale(0.5);
+    opacity: 0;
+  }
+} 
   </style>
 </head>
+  <script>
+  const symbols = ['✨', '💖', '⭐', '❤️'];
+  
+  function createFloatingSymbol() {
+    const symbol = document.createElement('div');
+    symbol.classList.add(Math.random() > 0.5 ? 'star' : 'heart');
+    symbol.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+    symbol.style.left = Math.random() * 100 + 'vw';
+    symbol.style.fontSize = (Math.random() * 10 + 16) + 'px';
+    document.body.appendChild(symbol);
+
+    setTimeout(() => {
+      symbol.remove();
+    }, 5000);
+  }
+
+  setInterval(createFloatingSymbol, 500);
+  </script> 
 <body>
   <h1>Happy Birthday Mariam 💖</h1>
   <p>كل سنة وانتي طيبة يا أجمل هدية ربنا بعتها لقلبي.</p>
