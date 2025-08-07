@@ -14,24 +14,45 @@
       display:flex;
       flex-direction:column;
       justify-content:center;
-      overflow:hidden;
     }
     h1 { font-size:3em; margin:0.2em; }
     p { font-size:1.2em; margin:0.5em; }
-    .gift, .music-btn {
-      margin-top:1em;
-      padding:12px 24px;
-      background:#e8c7f8;
-      color:#4a0a3d;
-      border:2px solid #a259c7;
-      border-radius:12px;
-      font-size:1.1em;
-      font-weight:bold;
-      cursor:pointer;
+
+    .gift, .music-button {
+      padding: 12px 24px;
+      font-size: 18px;
+      margin-top: 25px;
+      cursor: pointer;
+      background-color: #e8c7f8;
+      border: 2px solid #a259c7;
+      border-radius: 12px;
+      color: #4a0a3d;
+      font-weight: bold;
       transition: all 0.3s ease;
     }
-    .gift:hover, .music-btn:hover {
-      background:#f6ddfb;
+    .gift:hover, .music-button:hover {
+      background-color: #f6ddfb;
+    }
+
+    .music-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10000;
+      opacity: 0;
+      animation: fadeInFloat 1s ease-in-out forwards;
+      animation-delay: 3s;
+    }
+
+    @keyframes fadeInFloat {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .star, .heart {
@@ -52,17 +73,16 @@
         transform: translateY(-120vh) scale(0.5);
         opacity: 0;
       }
-    } 
+    }
   </style>
 </head>
 <body>
-
   <h1>Happy Birthday Mariam 💖</h1>
   <p>كل سنة وانتي طيبة يا أجمل هدية ربنا بعتها لقلبي.</p>
   <p>On your special day, I want to remind you how much you mean to me. You light up my world.</p>
   <p>النهاردة مش بس عيد ميلادك، ده عيد حبّي ليكي وفرحتي بوجودك في حياتي.</p>
   <p>I prepared a little surprise for you 🎁</p>
-  <button class="gift" onclick="showGiftMessage()">Open your gift</button>
+  <button class="gift" onclick="showSurprise()">Open your gift</button>
   <p style="margin-top:2em;">With all my love, <br> Youssef 💜</p>
 
   <audio id="birthdayMusic" autoplay loop>
@@ -70,24 +90,28 @@
     Your browser does not support the audio element.
   </audio>
 
+  <!-- زر الموسيقى -->
+  <button id="playMusicBtn" class="music-button" style="display:none;">Play Music 🎵</button>
+
   <script>
     // زر تشغيل الموسيقى
+    const audio = document.getElementById('birthdayMusic');
+    const musicBtn = document.getElementById('playMusicBtn');
+
     window.addEventListener('load', () => {
-      const audio = document.getElementById('birthdayMusic');
-      audio.play().catch(() => {
-        const btn = document.createElement('button');
-        btn.innerText = "Play Music 🎵";
-        btn.className = "music-btn";
-        btn.onclick = () => {
-          audio.play();
-          btn.remove();
-        };
-        document.body.appendChild(btn);
-      });
+      setTimeout(() => {
+        musicBtn.style.display = 'block';
+      }, 3000); // بعد 3 ثواني
+
+      musicBtn.onclick = () => {
+        audio.play();
+        musicBtn.remove();
+      };
     });
 
-    // النجوم والقلوب المتحركة
+    // نجوم وقلوب
     const symbols = ['✨', '💖', '⭐', '❤️'];
+
     function createFloatingSymbol() {
       const symbol = document.createElement('div');
       symbol.classList.add(Math.random() > 0.5 ? 'star' : 'heart');
@@ -95,46 +119,18 @@
       symbol.style.left = Math.random() * 100 + 'vw';
       symbol.style.fontSize = (Math.random() * 10 + 16) + 'px';
       document.body.appendChild(symbol);
-      setTimeout(() => { symbol.remove(); }, 5000);
+
+      setTimeout(() => {
+        symbol.remove();
+      }, 5000);
     }
+
     setInterval(createFloatingSymbol, 500);
 
-    // رسالة الهدية
-    function showGiftMessage() {
-      const message = document.createElement('div');
-      message.style.position = 'fixed';
-      message.style.top = '50%';
-      message.style.left = '50%';
-      message.style.transform = 'translate(-50%, -50%)';
-      message.style.background = '#fff';
-      message.style.padding = '30px';
-      message.style.borderRadius = '15px';
-      message.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
-      message.style.zIndex = 10000;
-      message.style.maxWidth = '90%';
-      message.style.textAlign = 'center';
-      message.style.fontSize = '1.2em';
-      message.style.color = '#4a0a3d';
-
-      message.innerHTML = `
-        <p>🎁💖  المفاجأة الحقيقية هي إني دايمًا جنبك وبحبك 💖🎁</p>
-        <p>كل سنة وانتي بخير يا أجمل حاجة حصلتلي.</p>
-        <p>يمكن مفيش هدية مادية دلوقتي غير لمى اشوفك، لكن قلبي كله ليكي 💜</p>
-        <button onclick="this.parentElement.remove()" style="
-          margin-top: 20px;
-          padding: 10px 20px;
-          font-size: 16px;
-          border: none;
-          border-radius: 8px;
-          background-color: #e8c7f8;
-          color: #4a0a3d;
-          font-weight: bold;
-          cursor: pointer;
-        ">Close</button>
-      `;
-      document.body.appendChild(message);
+    // الرسالة عند الضغط على زر الهدية
+    function showSurprise() {
+      alert("🎉 Surprise! \nكل لحظة وانتي بخير وسعادة، ويارب السنة دي تبقى أجمل سنة في حياتك ❤️");
     }
   </script>
-
 </body>
-</html> 
+</html>
