@@ -15,89 +15,95 @@
       flex-direction:column;
       justify-content:center;
     }
+
     h1 { font-size:3em; margin:0.2em; }
     p { font-size:1.2em; margin:0.5em; }
-    .gift { margin-top:1em; padding:0.8em 1.5em; background:#ffffffcc; color:#4a0a3d; border:none; border-radius:8px; font-size:1.1em; cursor:pointer; }
-    .star, .heart {
-  position: fixed;
-  bottom: -20px;
-  font-size: 20px;
-  animation: floatUp 5s linear infinite;
-  pointer-events: none;
-  z-index: 9999;
-}
 
-@keyframes floatUp {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-120vh) scale(0.5);
-    opacity: 0;
-  }
-} 
+    .styled-button {
+      margin-top:1em;
+      padding:12px 24px;
+      background-color: #e8c7f8;
+      color: #4a0a3d;
+      border: 2px solid #a259c7;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .styled-button:hover {
+      background-color: #f6ddfb;
+    }
+
+    .star, .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 5s linear infinite;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) scale(0.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
-  <script>
-  const symbols = ['✨', '💖', '⭐', '❤️'];
-  
-  function createFloatingSymbol() {
-    const symbol = document.createElement('div');
-    symbol.classList.add(Math.random() > 0.5 ? 'star' : 'heart');
-    symbol.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-    symbol.style.left = Math.random() * 100 + 'vw';
-    symbol.style.fontSize = (Math.random() * 10 + 16) + 'px';
-    document.body.appendChild(symbol);
-
-    setTimeout(() => {
-      symbol.remove();
-    }, 5000);
-  }
-
-  setInterval(createFloatingSymbol, 500);
-  </script> 
 <body>
   <h1>Happy Birthday Mariam 💖</h1>
   <p>كل سنة وانتي طيبة يا أجمل هدية ربنا بعتها لقلبي.</p>
   <p>On your special day, I want to remind you how much you mean to me. You light up my world.</p>
   <p>النهاردة مش بس عيد ميلادك، ده عيد حبّي ليكي وفرحتي بوجودك في حياتي.</p>
   <p>I prepared a little surprise for you 🎁</p>
-  <button class="gift" onclick="alert('Surprise coming soon!')">Open your gift</button>
+
+  <!-- زر الهدية الجديد -->
+  <button class="styled-button" onclick="alert('Surprise coming soon!')">Open your gift</button>
+
   <p style="margin-top:2em;">With all my love, <br> Youssef 💜</p>
+
   <audio id="birthdayMusic" autoplay loop>
-  <source src="https://raw.githubusercontent.com/Joo-png69/happy-birthday-mariam/main/happy-birthday-musicbox.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-<script>
-  window.addEventListener('load', () => {
-    const audio = document.getElementById('birthdayMusic');
-    audio.play().catch(() => {
-      const btn = document.createElement('button');
-      btn.innerText = "Play Music 🎵";
-      btn.style.padding = "12px 24px";
-      btn.style.fontSize = "18px";
-      btn.style.marginTop = "25px";
-      btn.style.cursor = "pointer";
-      btn.style.backgroundColor = "#e8c7f8";
-      btn.style.border = "2px solid #a259c7";
-      btn.style.borderRadius = "12px";
-      btn.style.color = "#4a0a3d";
-      btn.style.fontWeight = "bold";
-      btn.style.transition = "all 0.3s ease";
-      btn.onmouseover = () => {
-        btn.style.backgroundColor = "#f6ddfb";
-      };
-      btn.onmouseout = () => {
-        btn.style.backgroundColor = "#e8c7f8";
-      };
-      btn.onclick = () => {
-        audio.play();
-        btn.remove();
-      };
-      document.body.appendChild(btn);
+    <source src="https://raw.githubusercontent.com/Joo-png69/happy-birthday-mariam/main/happy-birthday-musicbox.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const symbols = ['✨', '💖', '⭐', '❤️'];
+
+    function createFloatingSymbol() {
+      const symbol = document.createElement('div');
+      symbol.classList.add(Math.random() > 0.5 ? 'star' : 'heart');
+      symbol.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      symbol.style.left = Math.random() * 100 + 'vw';
+      symbol.style.fontSize = (Math.random() * 10 + 16) + 'px';
+      document.body.appendChild(symbol);
+
+      setTimeout(() => {
+        symbol.remove();
+      }, 5000);
+    }
+
+    setInterval(createFloatingSymbol, 500);
+
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('birthdayMusic');
+      audio.play().catch(() => {
+        const btn = document.createElement('button');
+        btn.innerText = "Play Music 🎵";
+        btn.classList.add("styled-button");
+        btn.onclick = () => {
+          audio.play();
+          btn.remove();
+        };
+        document.body.appendChild(btn);
+      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>
