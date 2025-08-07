@@ -28,11 +28,29 @@
   <p>I prepared a little surprise for you 🎁</p>
   <button class="gift" onclick="alert('Surprise coming soon!')">Open your gift</button>
   <p style="margin-top:2em;">With all my love, <br> Youssef 💜</p>
+  <audio id="birthdayMusic" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c28e6449b3.mp3?filename=happy-birthday-to-you-piano-version-21475.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
-  <!-- موسيقى تعمل تلقائياً -->
-  <audio autoplay loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+<script>
+  // محاولة لتشغيل الصوت تلقائيًا
+  window.addEventListener('load', () => {
+    const audio = document.getElementById('birthdayMusic');
+    audio.play().catch(() => {
+      // لو المتصفح رفض، نعرض زر لتشغيله
+      const btn = document.createElement('button');
+      btn.innerText = "تشغيل الموسيقى 🎵";
+      btn.style.padding = "10px 20px";
+      btn.style.fontSize = "16px";
+      btn.style.marginTop = "20px";
+      btn.onclick = () => {
+        audio.play();
+        btn.remove();
+      };
+      document.body.appendChild(btn);
+    });
+  });
+</script>
 </body>
 </html>
