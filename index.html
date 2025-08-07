@@ -32,17 +32,28 @@
   <source src="https://raw.githubusercontent.com/Joo-png69/happy-birthday-mariam/main/happy-birthday-musicbox.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
-
-<script>
+  <script>
   window.addEventListener('load', () => {
     const audio = document.getElementById('birthdayMusic');
     audio.play().catch(() => {
       const btn = document.createElement('button');
-      btn.innerText = "تشغيل الموسيقى 🎵";
-      btn.style.padding = "10px 20px";
-      btn.style.fontSize = "16px";
-      btn.style.marginTop = "20px";
+      btn.innerText = "Play Music 🎵";
+      btn.style.padding = "12px 24px";
+      btn.style.fontSize = "18px";
+      btn.style.marginTop = "25px";
       btn.style.cursor = "pointer";
+      btn.style.backgroundColor = "#e8c7f8";
+      btn.style.border = "2px solid #a259c7";
+      btn.style.borderRadius = "12px";
+      btn.style.color = "#4a0a3d";
+      btn.style.fontWeight = "bold";
+      btn.style.transition = "all 0.3s ease";
+      btn.onmouseover = () => {
+        btn.style.backgroundColor = "#f6ddfb";
+      };
+      btn.onmouseout = () => {
+        btn.style.backgroundColor = "#e8c7f8";
+      };
       btn.onclick = () => {
         audio.play();
         btn.remove();
@@ -50,6 +61,6 @@
       document.body.appendChild(btn);
     });
   });
-</script>
+  </script> 
 </body>
 </html>
